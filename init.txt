@@ -1,1 +1,1 @@
-init 123
+tttinit 123
