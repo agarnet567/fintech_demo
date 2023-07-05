@@ -43,8 +43,8 @@ resource "aws_security_group" "bastion_security_group" {
 # Create an EC2 instance for the bastion host
 resource "aws_instance" "bastion_host" {
   ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t2.micro"
-  key_name      = "garnet_key"
+  instance_type = var.instance_type
+  key_name      = var.key_name
 
   vpc_security_group_ids = [aws_security_group.bastion_security_group.id]
   subnet_id              = aws_subnet.public_subnet_1.id

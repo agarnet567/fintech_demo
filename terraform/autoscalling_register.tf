@@ -44,8 +44,8 @@ resource "aws_autoscaling_group" "register" {
 resource "aws_launch_configuration" "register_lc" {
   name          = "register-lc"
   image_id      = data.aws_ami.amazon_linux.id 
-  instance_type = "t2.micro"
-  key_name      = "garnet_key"
+  instance_type = var.instance_type
+  key_name      = var.key_name
 
   security_groups = [aws_security_group.asg_www_security_group.id]
   
