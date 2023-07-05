@@ -1,18 +1,18 @@
 # Define provider
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
 # Create a VPC
 resource "aws_vpc" "my_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.cidr_block
 }
 
 # Create two public subnets
 resource "aws_subnet" "public_subnet_1" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+  cidr_block        = var.pub_subnet_1
+  availability_zone = var.az_1
   
   tags = {
     Name = "public_subnet_1"
@@ -21,8 +21,8 @@ resource "aws_subnet" "public_subnet_1" {
 
 resource "aws_subnet" "public_subnet_2" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-east-1b"
+  cidr_block        = var.pub_subnet_2
+  availability_zone = var.az_2
   
   tags = {
     Name = "public_subnet_2"
@@ -32,8 +32,8 @@ resource "aws_subnet" "public_subnet_2" {
 # Create two private subnets
 resource "aws_subnet" "private_subnet_1" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.3.0/24"
-  availability_zone = "us-east-1a"
+  cidr_block        = var.priv_subnet_1
+  availability_zone = var.az_1
   
   tags = {
     Name = "private_subnet_1"
@@ -42,8 +42,8 @@ resource "aws_subnet" "private_subnet_1" {
 
 resource "aws_subnet" "private_subnet_2" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.4.0/24"
-  availability_zone = "us-east-1b"
+  cidr_block        = var.priv_subnet_2
+  availability_zone = var.az_2
   
   tags = {
     Name = "private_subnet_2"
